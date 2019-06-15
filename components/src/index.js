@@ -24,7 +24,7 @@ const App = () => {
                     content={"I like the subject"}
                 />
             </ApprovalCard>
-            
+
             <ApprovalCard>
                 <CommentDetail
                     avatar={faker.image.avatar()}
