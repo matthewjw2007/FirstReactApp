@@ -1,15 +1,21 @@
 import React  from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
 class App extends React.Component {
-    constructor(props) {
-        // This is a reference to the parent's (React.Component) constructor function
-        super(props);
+    // constructor(props) {
+    //     // This is a reference to the parent's (React.Component) constructor function
+    //     super(props);
+    //
+    //     // THIS IS THE ONLY TIME YOU DO DIRECT ASSIGNMENT TO this.state
+    //     this.state = {lat: null, errorMessage: '' };
+    // }
 
-        // THIS IS THE ONLY TIME YOU DO DIRECT ASSIGNMENT TO this.state
-        this.state = {lat: null, errorMessage: '' };
+    // This is equivalent to above
+    state = {lat: null, errorMessage: ''};
 
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
             // We called setState to update the state object
             (position) => {
@@ -27,9 +33,9 @@ class App extends React.Component {
             return <div>Error: {this.state.errorMessage}</div>
         }
         else if(this.state.lat && !this.state.errorMessage){
-            return <div>Latitude: {this.state.lat}</div>
+            return <SeasonDisplay lat={this.state.lat}/>
         } else {
-            return <div>Loading...</div>
+            return <Spinner />
         }
     }
 }
